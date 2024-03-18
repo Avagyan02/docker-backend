@@ -14,8 +14,8 @@ pipeline {
         stage('Extract Payload Hash') {
             steps {
                 script {
-                    def gitRevListOutput = sh(script: 'git rev-list HEAD', returnStdout: true).trim()
-                    echo "Git Revision List: ${gitRevListOutput}"
+                    def commitHash = sh(returnStdout: true, script: 'git rev-list -n 1 HEAD').trim()
+                    echo "Git Revision List: ${commitHash}"
                 }
             }
         }
