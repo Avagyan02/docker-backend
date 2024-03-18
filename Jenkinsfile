@@ -16,6 +16,7 @@ pipeline {
                 script {
                     def commitHash = sh(returnStdout: true, script: 'git rev-parse --short=12 HEAD').trim()
                     echo "Git Revision List: ${commitHash}"
+                    sh 'cd /var/jenkins_home/workspace | ls -la'
                 }
             }
         }
