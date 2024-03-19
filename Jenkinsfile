@@ -18,7 +18,7 @@ pipeline {
                     echo "Git Revision List: ${commitHash}"
                 }
 
-                sh 'cd /var/jenkins_home/workspace | ls -la' 
+                sh 'cd /var/jenkins_home/workspace | ls -la'
                 sh 'docker build -t docker-backend .'
                 sh 'docker images'
             }
