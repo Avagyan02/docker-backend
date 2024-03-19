@@ -19,7 +19,7 @@ pipeline {
                 }
 
                 sh 'cd /var/jenkins_home/workspace | ls -la'
-                sh 'docker build -t docker-backend .' 
+                sh 'docker build -t docker-backend .'
                 sh 'docker images'
             }
         }
