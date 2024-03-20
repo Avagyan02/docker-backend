@@ -1,6 +1,11 @@
 pipeline {
     agent any
     
+    environment {
+        // Define initial environment variables
+        MY_VARIABLE = 'initial_value'
+    }
+
     triggers {
         GenericTrigger(
             // genericVariables: [
@@ -14,14 +19,14 @@ pipeline {
         stage('Extract Payload Hash') {
             steps {
                 script {
-                    def commitHash = sh(returnStdout: true, script: 'git rev-parse --short=12 HEAD').trim()
-                    echo "Git Revision List: ${commitHash}"
+                    env.MY_VARIABLE = sh(returnStdout: true, script: 'git rev-parse --short=12 HEAD').trim()
+                    echo "Git Revision List: ${env.MY_VARIABLE}"
                 }
 
                 sh 'cd /var/jenkins_home/workspace | ls -la'
                 sh 'docker build -t docker-backend .'
                 // sh 'docker images' 
-                sh "docker tag docker-backend samavgn02/docker-backend:${commitHash}"
+                sh "docker tag docker-backend samavgn02/docker-backend:${env.MY_VARIABLE}"
             }
         }
     }
