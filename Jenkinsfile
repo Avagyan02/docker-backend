@@ -4,6 +4,8 @@ pipeline {
     environment {
         // Define initial environment variables
         MY_VARIABLE = sh(returnStdout: true, script: 'git rev-parse --short=12 HEAD').trim()
+        DOCKERHUB_USERNAME = 'samavgn02'
+        DOCKERHUB_PASSWORD = 'Avagyan2002'
     }
 
     triggers {
@@ -26,6 +28,7 @@ pipeline {
                 sh 'cd /var/jenkins_home/workspace | ls -la'
                 sh 'docker build -t docker-backend .'
                 sh "docker tag docker-backend samavgn02/docker-backend:${env.MY_VARIABLE}"
+                sh "docker login -u ${DOCKERHUB_USERNAME} -p ${DOCKERHUB_PASSWORD}"
                 sh "docker push samavgn02/docker-backend:${env.MY_VARIABLE}"
             }
         }
