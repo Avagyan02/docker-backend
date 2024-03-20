@@ -3,7 +3,7 @@ pipeline {
     
     environment {
         // Define initial environment variables
-        MY_VARIABLE = 'initial_value'
+        MY_VARIABLE = ''
     }
 
     triggers {
