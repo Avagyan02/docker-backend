@@ -26,7 +26,7 @@ pipeline {
                 sh 'cd /var/jenkins_home/workspace | ls -la'
                 sh 'docker build -t docker-backend .'
                 // sh 'docker images' 
-                sh "docker tag docker-backend samavgn02/docker-backend:${env.MY_VARIABLE}"
+                sh "docker push samavgn02/docker-backend:${env.MY_VARIABLE}"
             }
         }
     }
