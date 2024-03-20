@@ -2,17 +2,13 @@ pipeline {
     agent any
     
     environment {
-        // Define initial environment variables
-        MY_VARIABLE = sh(returnStdout: true, script: 'git rev-parse --short=12 HEAD').trim()
+        MY_VARIABLE = sh(returnStdout: true, script: 'git rev-parse --short=7 HEAD').trim()
         DOCKERHUB_USERNAME = 'samavgn02'
         DOCKERHUB_PASSWORD = 'Avagyan2002'
     }
 
     triggers {
         GenericTrigger(
-            // genericVariables: [
-            //     [key: 'WEBHOOK_PAYLOAD', value: '$.payload']
-            // ],
             token: 'jenkins-token'
         )
     }
@@ -21,7 +17,6 @@ pipeline {
         stage('Extract Payload Hash') {
             steps {
                 script {
-                    // env.MY_VARIABLE = sh(returnStdout: true, script: 'git rev-parse --short=12 HEAD').trim()
                     echo "Git Revision List: ${env.MY_VARIABLE}"
                 }
 
