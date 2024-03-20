@@ -3,7 +3,7 @@ pipeline {
     
     environment {
         // Define initial environment variables
-        MY_VARIABLE = ''
+        MY_VARIABLE = sh(returnStdout: true, script: 'git rev-parse --short=12 HEAD').trim()
     }
 
     triggers {
@@ -19,7 +19,7 @@ pipeline {
         stage('Extract Payload Hash') {
             steps {
                 script {
-                    env.MY_VARIABLE = sh(returnStdout: true, script: 'git rev-parse --short=12 HEAD').trim()
+                    // env.MY_VARIABLE = sh(returnStdout: true, script: 'git rev-parse --short=12 HEAD').trim()
                     echo "Git Revision List: ${env.MY_VARIABLE}"
                 }
 
