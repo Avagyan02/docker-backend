@@ -9,7 +9,7 @@ pipeline {
         GenericTrigger(
             token: 'docker-backend'
         )
-    }
+    } 
     
     stages {
         stage('Extract Payload Hash') {
