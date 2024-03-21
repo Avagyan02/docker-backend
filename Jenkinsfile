@@ -14,7 +14,7 @@ pipeline {
     stages {
         stage('Extract Payload Hash') {
             steps {
-                script {
+                script { 
                     withCredentials([usernamePassword(credentialsId: 'jenkins-environments', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
                         echo "Username: ${env.USERNAME}"
                         echo "Password: ${env.PASSWORD}"
