@@ -24,8 +24,8 @@ pipeline {
 
                     docker.withRegistry('https://index.docker.io/v1/', 'jenkins-environments') {
                         docker.build("docker-backend")
-                        sh "docker tag docker-backend ${DOCKERHUB_USERNAME}/docker-backend"
-                        docker.image("${DOCKERHUB_USERNAME}/docker-backend").push(env.MY_VARIABLE)
+                        sh "docker tag docker-backend samavgn02/docker-backend"
+                        docker.image("samavgn02/docker-backend").push(env.MY_VARIABLE)
                     }
                 }
 
