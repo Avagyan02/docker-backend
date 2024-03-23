@@ -21,9 +21,8 @@ pipeline {
                     //     DOCKERHUB_USERNAME = env.USERNAME
                     //     DOCKERHUB_PASSWORD = env.PASSWORD
                     // }
-                    docker.build("samavgn02/docker-backend")
-
                     docker.withRegistry('https://index.docker.io/v1/', 'jenkins-environments') {
+                        docker.build("samavgn02/docker-backend")
                         docker.image("samavgn02/docker-backend").push(env.MY_VARIABLE)
                     }
                 }
