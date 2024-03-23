@@ -23,8 +23,8 @@ pipeline {
                     // }
 
                     docker.withRegistry('https://index.docker.io/v1/', 'jenkins-environments') {
-                        docker.build("docker-backend")
-                        sh "docker tag docker-backend samavgn02/docker-backend"
+                        docker.build("samavgn02/docker-backend")
+                        // sh "docker tag docker-backend samavgn02/docker-backend"
                         docker.image("samavgn02/docker-backend").push(env.MY_VARIABLE)
                     }
                 }
