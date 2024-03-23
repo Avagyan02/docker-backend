@@ -17,21 +17,15 @@ pipeline {
         stage('Push Stage') {
             steps {
                 script {
-                    // withCredentials([usernamePassword(credentialsId: 'jenkins-environments', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
-                    //     DOCKERHUB_USERNAME = env.USERNAME
-                    //     DOCKERHUB_PASSWORD = env.PASSWORD
-                    // }
+                    withCredentials([usernamePassword(credentialsId: 'jenkins-environments', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+                        DOCKERHUB_USERNAME = env.USERNAME
+                        DOCKERHUB_PASSWORD = env.PASSWORD
+                    }
                     docker.withRegistry('https://index.docker.io/v1/', 'jenkins-environments') {
                         docker.build("samavgn02/docker-backend")
                         docker.image("samavgn02/docker-backend").push(env.MY_VARIABLE)
                     }
                 }
-
-                // sh 'cd /var/jenkins_home/workspace'
-                // sh 'docker build -t docker-backend .'
-                // sh "docker login -u ${DOCKERHUB_USERNAME} -p ${DOCKERHUB_PASSWORD}"
-                // sh "docker tag docker-backend ${DOCKERHUB_USERNAME}/docker-backend:${env.MY_VARIABLE}"
-                // sh "docker push ${DOCKERHUB_USERNAME}/docker-backend:${env.MY_VARIABLE}"
             }
         }
 
@@ -46,7 +40,6 @@ pipeline {
                 )
                 
                 sh "bash docker-compose-file-backend-build-value-change.sh ${DOCKERHUB_USERNAME}/docker-backend:${env.MY_VARIABLE}"
-
                 sh "git add ."
                 sh "git commit -m 'update backend jenkins file'"
                 withCredentials([gitUsernamePassword(credentialsId: 'github-environments', usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD')]) {
