@@ -41,7 +41,7 @@ pipeline {
                     poll: true
                 )
                 
-                sh "bash docker-compose-file-frontend-build-value-change.sh ${DOCKERHUB_USERNAME}/docker-backend:${env.MY_VARIABLE}"
+                sh "bash docker-compose-file-backend-build-value-change.sh ${DOCKERHUB_USERNAME}/docker-backend:${env.MY_VARIABLE}"
                 sh "bash docker-compose-file-version-change.sh"                    
 
                 sh "git add ."
