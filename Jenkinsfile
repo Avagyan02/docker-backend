@@ -35,7 +35,7 @@ pipeline {
             steps {
                 git(
                     url: "https://github.com/Avagyan02/docker-frontend-backend-db.git",
-                    branch: "master",
+                    branch: "main",
                     changelog: true,
                     credentialsId: 'github-environments',
                     poll: true
